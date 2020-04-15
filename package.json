@@ -2,7 +2,7 @@
   "name": "lab2",
   "version": "1.0.0",
   "description": "Lab2",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,7 @@
     "eslint-plugin-standard": "^4.0.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
   }
 }
