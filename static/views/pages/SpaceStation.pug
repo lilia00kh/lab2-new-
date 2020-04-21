@@ -1,0 +1,81 @@
+extends ../layout.pug
+
+block prepend styles
+  link(rel='stylesheet' href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css')
+
+block content
+  div(class='breadcrumb')
+  h1 Додати нову станцію
+  form(id='shop-add-form' name='shop-add-form' class='form-inline' action='/addNewStation' method="POST")
+    div(class='form-group')
+      div(class='col-md-3')
+        label(for='number') Номер
+      div(class='col-md-9')
+        input(id='number' name='number' value='' class='form-control')
+    div(class='form-group')
+      div(class='col-md-3')
+        label(for='capacity') Місткість
+      div(class='col-md-9')
+        input(id='capacity' name='capacity' value='' class='form-control')
+    div(class='form-group')
+      div(class='col-md-3')
+        label(for='necessity') Потреба
+      div(class='col-md-9')
+        input(id='necessity' name='necessity' value='' class='form-control')
+    div(class='form-group')
+      div(class='col-md-12')
+        button(type='submit' class='btn btn-primary') Додати
+    p=success
+    br
+
+  div(class='breadcrumb')
+  h1  Редагувати станцію в колекції
+  div(class='form-group')
+  form(method='POST' action='/editStation' )
+    label(for='OueStations') Наша станція для редагування
+    select#OueStations(name = 'index')
+      each val, index in data
+        option= (index+1) + '. Номер:' + val.number + '. Місткість:' + val.capacity + '. Потреба:' + val.necessity
+    div.form-inline
+      div(class='col-md-1')
+        label(for='NewCapacity') Нова місткість
+      div(class='col-md-3')
+        input#NewCapacity.form-control(type='text', placeholder='Місткість' name='capacity')
+    div.form-inline
+      div(class='col-md-1')
+        label(for='NewNecessity') Нова потреба
+      div(class='col-md-4')
+        input#NewNecessity.form-control(type='Country', placeholder='Потреба' name='necessity')
+      div(class='col-md-2')
+        button.btn.btn-primary(type='submit') Редагувати
+    p= newText
+    br
+    br
+
+  div(class='breadcrumb')
+  h1 Видалити станцію з колекції
+  div.form-inline
+  form(method='POST' action='/deleteStation' class='form-inline')
+    label(for='OueStation') Наша станція для видалення:
+    select#OueStation(name = 'index')
+      each val, index in data
+        option= (index+1) + '. Номер:' + val.number + '. Місткість:' + val.capacity + '. Потреба:' + val.necessity
+    button.btn.btn-primary(type='submit') Видалити
+    p= deleteText
+    br
+
+  div(class='breadcrumb')
+  h1  Пошук одної станції в колекції
+  div.form-inline
+  form(method='POST' action='/findSpaceStation' class='form-inline')
+      label(for='NewFindNameStation') Номер
+      input#NewFindNameStation.form-control(type='text', placeholder='Номер' name='number')
+      button.btn.btn-primary(type='submit') Знайти станцію
+      p= FindText
+      br
+
+block append scripts
+  script(src='/static/js/models/shop.js')
+  script(src='//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')
+  script(src='/static/js/views/shop.js')
+

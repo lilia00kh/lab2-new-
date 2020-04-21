@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block prepend styles
+    link(rel='stylesheet' href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css')
+
+block content
+    div(class='breadcrumb')
+    h1  Перевезення із планети на станцію
+    div(class='form-group')
+    form(method='POST' action='/DeliveryFromStationToThePlanet' )
+        label(for='Station') Станція,на яку потрібно перевезти
+        select#Station(name = 'index')
+            each val, index in data
+                option=(index + 1) + '. Номер:' + val.number + '. Місткість:' + val.capacity + '. Потреба:' + val.necessity
+        label(for='Planet') із планети
+        select#Planet(name = 'index')
+            each val, index in data2
+                option=(index+1) +'. Назва: ' + val.name + ', маса: ' + val.mass + ', місткість: ' + val.capacity
+        button.btn.btn-primary(type='submit') Перевезти
+        p= newText
+        br
+        br
+
+block append scripts
+    script(src='/static/js/models/shop.js')
+    script(src='//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')
+    script(src='/static/js/views/shop.js')
+
